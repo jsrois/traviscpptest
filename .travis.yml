@@ -1,0 +1,25 @@
+language: cpp
+compiler:
+  - gcc
+before_install:
+  - echo $LANG
+  - echo $LC_ALL
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get install -y qt4-qmake; fi
+before_script:
+  - echo "before script"
+script: qmake traviscpptest.pro && make
+branches:
+  only:
+    - master
+notifications:
+  email:
+    recipients:
+      - javier.sanchez.rois@gmail.com
+    on_success: change
+    on_failure: always
+  
+env:
+  - LANG="en_US.UTF-8"
+os:
+  - linux
+
